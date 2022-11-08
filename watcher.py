@@ -29,24 +29,26 @@ def scanner(host):
             if result ==0:
                 print(f"Port {port} is open")
             s.close()
-
+        return True
+    except:
+        return False
 #Grabs the pubkey of the website if there is.
 def grabber(host):
     try:
-        response = request.urlretrieve("https://www.facebook.com/favicon.ico", "facebook.ico")
+        response = request.urlretrieve(host)
         return True
     except:
         return False
 
 
 host = input("Enter target: ")
-if start():
+if start(host):
     print(f"Gathering info from {host}")
 else:
     print(f"Connection error from {host}")
     sys.exit()
 
-if scanner():
+if scanner(host):
     print(f"Scanning connected target {host} !")
 else:
     print("Failed to scan -skipping-")
